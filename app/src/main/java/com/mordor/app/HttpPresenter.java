@@ -7,6 +7,7 @@ import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
@@ -35,6 +36,7 @@ public class HttpPresenter extends BasePresenter {
                     e.printStackTrace();
                 }
                 Document document = Jsoup.parse(html);
+                Elements links = document.select("#rso");
                 Log.d("asdadas",response.body().toString());
             }
 
