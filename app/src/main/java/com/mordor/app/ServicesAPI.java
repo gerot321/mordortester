@@ -12,5 +12,6 @@ import retrofit2.http.Query;
 public interface ServicesAPI {
     @GET("search")
     Call<ResponseBody> login(@Query("q") String keyword, @Query("start") String offset);
-
+    @POST("domain/list")
+    Call<BaseResponse<ListResponse<Domain>>> domainList(@Body ListRequest listRequest);
 }

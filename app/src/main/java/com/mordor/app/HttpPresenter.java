@@ -18,9 +18,13 @@ import retrofit2.Response;
 
 public class HttpPresenter extends BasePresenter {
     private MainActivity mainActivity;
+    private RankingResultActivity rankingResultActivity;
 
     public HttpPresenter(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
+    }
+    public HttpPresenter(RankingResultActivity rankingResultActivity) {
+        this.rankingResultActivity = rankingResultActivity;
     }
 
     public void login() {
@@ -46,5 +50,15 @@ public class HttpPresenter extends BasePresenter {
             }
         });
 
+    }
+
+    public void getDomainList() {
+        ListRequest<EmptyObject, EmptyObject> listRequest = new ListRequest();
+        new CallerList<Domain>(this.rankingResultActivity, ServiceGenerator.createService(ServicesAPI.class).domainList(listRequest)){
+            @Override
+            public void onSuccess(ListResponse<Domain> data){
+                rankingResultActivity.onGetDomain(data.list);
+            }
+        };
     }
 }
